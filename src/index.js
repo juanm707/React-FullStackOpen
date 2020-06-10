@@ -39,7 +39,7 @@ const App = (props) => {
             <div>
                 <h1>Anecdote with most votes</h1>
                 <p>{mostVoted}</p>
-                <p> has {mostVotes} votes</p>
+                {mostVotes ? <p> has {mostVotes} votes</p> : <p/> }
             </div>
         </div>
     );
