@@ -85,6 +85,15 @@ const History = (props) => {
     );
 }
 
+const Statistic = (props) => {
+    let percent = props.percent ? '%' : '';
+    return (
+        <div>
+            <p>{props.text} {props.value}{percent}</p>
+        </div>
+    );
+}
+
 const Statistics = (props) => {
 
     let sum = props.options.reduce((a, b) => {
@@ -111,12 +120,12 @@ const Statistics = (props) => {
             <h2>
                 statistics
             </h2>
-            <p>good {props.options[0]}</p>
-            <p>neutral {props.options[1]}</p>
-            <p>bad {props.options[2]}</p>
-            <p>all {sum}</p>
-            <p>average {average}</p>
-            <p>positive {positive * 100}%</p>
+            <Statistic text={'good'} value={props.options[0]} percent={0}/>
+            <Statistic text={'neutral'} value={props.options[1]} percent={0}/>
+            <Statistic text={'bad'} value={props.options[2]} percent={0}/>
+            <Statistic text={'all'} value={sum} percent={0}/>
+            <Statistic text={'average'} value={average} percent={0}/>
+            <Statistic text={'positive'} value={positive * 100} percent={1}/>
         </div>
     );
 }
@@ -236,9 +245,9 @@ const App = (props) => {
                 </h1>
             </div>
             <div>
-                <Button handleClick={() => setGood(good + 1)} text={'good'}/>
-                <Button handleClick={() => setNeutral(neutral + 1)} text={'neutral'}/>
-                <Button handleClick={() => setBad(bad + 1)} text={'bad'}/>
+                <Button handleClick={() => setGood(good + 1)} text={'good'} style={{backgroundColor: 'limegreen'}}/>
+                <Button handleClick={() => setNeutral(neutral + 1)} text={'neutral'} />
+                <Button handleClick={() => setBad(bad + 1)} text={'bad'} style={{backgroundColor: 'red'}} />
             </div>
             <Statistics options={options} />
         </div>
