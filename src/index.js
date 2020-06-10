@@ -85,6 +85,29 @@ const History = (props) => {
     );
 }
 
+const Statistics = (props) => {
+
+    let sum = props.options.reduce((a, b) => {
+        return a + b;
+    }, 0);
+    let average = (props.options[0] + (props.options[2] * -1)) / sum;
+    let positive = props.options[0] / sum;
+
+    return (
+        <div>
+            <h2>
+                statistics
+            </h2>
+            <p>good {props.options[0]}</p>
+            <p>neutral {props.options[1]}</p>
+            <p>bad {props.options[2]}</p>
+            <p>all {sum}</p>
+            <p>average {average}</p>
+            <p>positive {positive * 100}%</p>
+        </div>
+    );
+}
+
 const App = (props) => {
 
     // const course = {
@@ -191,11 +214,6 @@ const App = (props) => {
     const [bad, setBad] = useState(0);
 
     let options = [good, neutral, bad];
-    let sum = options.reduce((a, b) => {
-        return a + b;
-    }, 0);
-    let average = (options[0] + (options[2] * -1)) / sum;
-    let positive = options[0] / sum;
 
     return (
         <div>
@@ -209,17 +227,7 @@ const App = (props) => {
                 <Button handleClick={() => setNeutral(neutral + 1)} text={'neutral'}/>
                 <Button handleClick={() => setBad(bad + 1)} text={'bad'}/>
             </div>
-            <div>
-                <h2>
-                    statistics
-                </h2>
-                <p>good {good}</p>
-                <p>neutral {neutral}</p>
-                <p>bad {bad}</p>
-                <p>all {sum}</p>
-                <p>average {average}</p>
-                <p>positive {positive * 100}%</p>
-            </div>
+            <Statistics options={options} />
         </div>
     );
 
