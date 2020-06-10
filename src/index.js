@@ -86,6 +86,7 @@ const History = (props) => {
 }
 
 const App = (props) => {
+
     // const course = {
     //     name: 'Half Stack application development',
     //     parts: [
@@ -148,41 +149,80 @@ const App = (props) => {
     //     </div>
     // );
 
-    const[left, setLeft] = useState(0);
-    const [right, setRight] = useState(0);
-    const [allClicks, setAll] = useState([]);
+    // const[left, setLeft] = useState(0);
+    // const [right, setRight] = useState(0);
+    // const [allClicks, setAll] = useState([]);
+    //
+    // const handleLeftClick = () => {
+    //     setAll(allClicks.concat('L'));
+    //     setLeft(left + 1);
+    // }
+    //
+    // const handleRightClick = () => {
+    //     setAll(allClicks.concat('R'));
+    //     setRight(right + 1);
+    // }
+    //
+    // return (
+    //     <div>
+    //         <div>
+    //             {left}
+    //             <Button
+    //                 handleClick={handleLeftClick}
+    //                 style={{backgroundColor: "yellow"}}
+    //                 text={'left'}
+    //             />
+    //             <Button
+    //                 handleClick={handleRightClick}
+    //                 style={{backgroundColor: "green"}}
+    //                 text={'right'}
+    //             />
+    //             {right}
+    //         </div>
+    //         <div>
+    //             <History allClicks={allClicks} />
+    //         </div>
+    //     </div>
+    // );
 
-    const handleLeftClick = () => {
-        setAll(allClicks.concat('L'));
-        setLeft(left + 1);
-    }
+    // save clicks of each button to own state
+    const [good, setGood] = useState(0);
+    const [neutral, setNeutral] = useState(0);
+    const [bad, setBad] = useState(0);
 
-    const handleRightClick = () => {
-        setAll(allClicks.concat('R'));
-        setRight(right + 1);
-    }
-    
+    let options = [good, neutral, bad];
+    let sum = options.reduce((a, b) => {
+        return a + b;
+    }, 0);
+    let average = (options[0] + (options[2] * -1)) / sum;
+    let positive = options[0] / sum;
+
     return (
         <div>
             <div>
-                {left}
-                <Button
-                    handleClick={handleLeftClick}
-                    style={{backgroundColor: "yellow"}}
-                    text={'left'}
-                />
-                <Button
-                    handleClick={handleRightClick}
-                    style={{backgroundColor: "green"}}
-                    text={'right'}
-                />
-                {right}
+                <h1>
+                    give feedback
+                </h1>
             </div>
             <div>
-                <History allClicks={allClicks} />
+                <Button handleClick={() => setGood(good + 1)} text={'good'}/>
+                <Button handleClick={() => setNeutral(neutral + 1)} text={'neutral'}/>
+                <Button handleClick={() => setBad(bad + 1)} text={'bad'}/>
+            </div>
+            <div>
+                <h2>
+                    statistics
+                </h2>
+                <p>good {good}</p>
+                <p>neutral {neutral}</p>
+                <p>bad {bad}</p>
+                <p>all {sum}</p>
+                <p>average {average}</p>
+                <p>positive {positive * 100}%</p>
             </div>
         </div>
     );
+
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
