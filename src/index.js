@@ -90,6 +90,19 @@ const Statistics = (props) => {
     let sum = props.options.reduce((a, b) => {
         return a + b;
     }, 0);
+
+    if (!sum) {
+        return (
+            <div>
+                <h2>
+                    statistics
+                </h2>
+                <p>
+                    No feedback given
+                </p>
+            </div>
+        );
+    }
     let average = (props.options[0] + (props.options[2] * -1)) / sum;
     let positive = props.options[0] / sum;
 
