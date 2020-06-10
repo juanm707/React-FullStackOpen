@@ -88,9 +88,15 @@ const History = (props) => {
 const Statistic = (props) => {
     let percent = props.percent ? '%' : '';
     return (
-        <div>
-            <p>{props.text} {props.value}{percent}</p>
-        </div>
+        <tr>
+            <td style={{textAlign: 'left'}}>
+                {props.text}
+            </td>
+            <td style={{textAlign: 'left'}}>
+                {props.value}
+                {percent}
+            </td>
+        </tr>
     );
 }
 
@@ -120,12 +126,16 @@ const Statistics = (props) => {
             <h2>
                 statistics
             </h2>
-            <Statistic text={'good'} value={props.options[0]} percent={0}/>
-            <Statistic text={'neutral'} value={props.options[1]} percent={0}/>
-            <Statistic text={'bad'} value={props.options[2]} percent={0}/>
-            <Statistic text={'all'} value={sum} percent={0}/>
-            <Statistic text={'average'} value={average} percent={0}/>
-            <Statistic text={'positive'} value={positive * 100} percent={1}/>
+            <table>
+                <tbody>
+                    <Statistic text={'good'} value={props.options[0]} percent={0}/>
+                    <Statistic text={'neutral'} value={props.options[1]} percent={0}/>
+                    <Statistic text={'bad'} value={props.options[2]} percent={0}/>
+                    <Statistic text={'all'} value={sum} percent={0}/>
+                    <Statistic text={'average'} value={average} percent={0}/>
+                    <Statistic text={'positive'} value={positive * 100} percent={1}/>
+                </tbody>
+            </table>
         </div>
     );
 }
