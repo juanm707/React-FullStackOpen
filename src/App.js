@@ -2,11 +2,38 @@ import React, { useState, useEffect } from 'react';
 import Note from './components/Note';
 import noteService from './services/notes';
 
+const Notification = ({ message }) => {
+    if (message === null) {
+        return null;
+    }
+
+    return (
+      <div className='error'>
+          {message}
+      </div>
+    );
+}
+
+const Footer = () => {
+    const footerStyle = {
+        color: 'green',
+        fontStyle: 'italic',
+        fontSize: 16
+    };
+
+    return (
+        <div style={footerStyle}>
+            <br/>
+            <em>Note app, Tutorial by Department of Computer Science, University of Helsinki 2020</em>
+        </div>
+    );
+}
+
 const App = (props) => {
     const [notes, setNotes] = useState([]);
     const [newNote, setNewNote] = useState('a new note...');
     const [showAll, setShowAll] = useState(true);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('some error happened');
 
     useEffect(() => {
        noteService
@@ -76,7 +103,13 @@ const App = (props) => {
             })
             .catch(error => {
                 //alert(`the note ${note.content} was already deleted from server`);
-                setError(`the note '${note.content}' was already deleted from server`);
+                //setError(`the note '${note.content}' was already deleted from server`);
+                setError(
+                  `Note '${note.content}' was already removed from the server`
+                );
+                setTimeout(() => {
+                    setError(null)
+                }, 5000);
                 setNotes(notes.filter(n => n.id !== id));
             })
     }
@@ -85,7 +118,7 @@ const App = (props) => {
 
     return (
         <div>
-            {error ? (<><p style={{color: 'red'}}>{error}</p><button onClick={() => setError('')}>hide error</button></>) : <p></p>}
+            <Notification message={error} />
             <h1>Notes</h1>
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
@@ -104,6 +137,7 @@ const App = (props) => {
                 <input value={newNote} onChange={handleNoteChange}/>
                 <button type="submit">Save</button>
             </form>
+            <Footer />
         </div>
     );
 }
