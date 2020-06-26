@@ -33,7 +33,7 @@ const App = (props) => {
     const [notes, setNotes] = useState([]);
     const [newNote, setNewNote] = useState('a new note...');
     const [showAll, setShowAll] = useState(true);
-    const [error, setError] = useState('some error happened');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
        noteService
@@ -67,10 +67,10 @@ const App = (props) => {
         event.preventDefault();
         //console.log('button clicked', event.target);
         const noteObject = {
+            id:  notes.length + 1,
             content: newNote,
             date: new Date().toISOString(),
-            important: Math.random() < 0.5,
-            id:  notes.length + 1,
+            important: Math.random() < 0.5
         }
 
         // // setNotes(notes.concat(noteObject));
