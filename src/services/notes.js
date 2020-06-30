@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'https://floating-ravine-98366.herokuapp.com/api/notes' //http://localhost:3001/api/notes';
+const baseUrl = '/api/notes' //'https://floating-ravine-98366.herokuapp.com/api/notes' //http://localhost:3001/api/notes';
 
 const getAll = () => {
     const request = axios.get(baseUrl);
